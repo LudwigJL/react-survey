@@ -1,7 +1,9 @@
 import { useState } from "react";
+import AnswersList from "./AnswersList";
 
 function Survey() {
   const [open, setOpen] = useState(false); //Ignore this state
+  const [answers, setAnswers] = useState([]);
   const [surveyData , setSurveyData] = useState({
     color: '',
     spend_time: '',
@@ -45,6 +47,8 @@ function Survey() {
     //Check to see if all is correct
     console.log('Form Submitted: ', {surveyData})
 
+    setAnswers([...answers, surveyData]);
+
     setSurveyData({
       color: '',
       spend_time: '',
@@ -59,6 +63,7 @@ function Survey() {
       <section className={`survey__list ${open ? "open" : ""}`}>
         <h2>Answers list</h2>
         {/* answers should go here */}
+        <AnswersList answerList={answers} />
       </section>
       <section className='survey__form'>
         <form className='form' onSubmit={submitForm}>
